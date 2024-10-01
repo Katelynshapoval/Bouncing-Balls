@@ -1,5 +1,26 @@
 import Ball from "./Ball.js";
-const form = document.querySelector("form");
+const form = document.querySelector("formBall");
+let addButton = document.getElementById("add");
+let clearButton = document.getElementById("clear");
+let menu = document.querySelector("createBallMenu");
+
+let ballArray = [];
+
+clearButton.addEventListener("click", () => {
+  ballArray = [];
+});
+
+addButton.addEventListener("click", () => {
+  let display;
+  if (menu.style.display !== "flex") {
+    display = "flex";
+    addButton.innerText = "Close";
+  } else {
+    display = "none";
+    addButton.innerText = "Add ball";
+  }
+  menu.style.display = display;
+});
 
 const options = {
   width: window.innerWidth,
@@ -8,14 +29,11 @@ const options = {
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-let initialBall;
-let ballArray = [];
-
 function setup() {
   canvas.width = options.width;
   canvas.height = options.height;
-  initialBall = new Ball(100, 100, 50, 2, 2, "#fff");
-  ballArray.push(initialBall);
+  //   initialBall = new Ball(100, 100, 50, 2, 2, "#fff");
+  //   ballArray.push(initialBall);
   requestAnimationFrame(loop);
 }
 
@@ -59,17 +77,22 @@ function randomFloat(min, max) {
 }
 
 function createBall(formData) {
-  let randomX = randomInt(100, 400);
-  let randomY = randomInt(100, 400);
-  let randomXSpreed = randomInt(-5, 5);
-  let randomYSpreed = randomInt(-5, 5);
+  canvas.style.backgroundColor = formData.backgroundColor;
+  if (ballArray.length > 70) {
+    alert("You can't create any more balls.");
+    return;
+  }
+  let randomX = randomInt(80, window.innerWidth - 100);
+  let randomY = randomInt(80, window.innerHeight - 100);
+  let randomXSpreed = randomInt(-7, 7);
+  let randomYSpreed = randomInt(-7, 7);
   let newBall = new Ball(
     randomX,
     randomY,
     formData.pickSize,
     randomXSpreed,
     randomYSpreed,
-    formData.pickColor
+    formData.ballColor
   );
   ballArray.push(newBall);
 }

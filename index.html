@@ -4,24 +4,38 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="shortcut icon"
+      href="https://www.freeiconspng.com/thumbs/circle-icon/red-circle-icon-1.png"
+      type="image/x-icon"
+    />
     <title>Bouncing Balls</title>
   </head>
   <body>
     <div class="main">
       <button id="add">Add ball</button>
+      <button id="clear">Clear</button>
       <div class="createBallMenu">
         <form class="form">
-          <label for="pickColor">Pick a color</label>
-          <input type="color" name="pickColor" id="pickColor" />
-          <label for="pickSize">Pick a size</label>
-          <input
-            type="number"
-            min="10"
-            max="100"
-            name="pickSize"
-            id="pickSize"
-          />
-          <button type="submit">Create</button>
+          <div class="pickers">
+            <label for="ballColor">Ball color: </label>
+            <input type="color" name="ballColor" id="ballColor" />
+            <label for="pickSize">Size: </label>
+            <input
+              type="number"
+              min="10"
+              max="100"
+              value="30"
+              name="pickSize"
+              id="pickSize"
+            />
+          </div>
+          <button id="createBall" type="submit">Create</button>
+        </form>
+        <form id="backgroundForm">
+          <label for="backgroundColor">Background color: </label>
+          <input type="color" name="backgroundColor" id="backgroundColor" />
+          <button id="changeBackground" type="submit">Change</button>
         </form>
       </div>
       <div class="ball" id="ball"></div>
