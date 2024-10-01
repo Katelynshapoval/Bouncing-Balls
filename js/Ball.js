@@ -1,8 +1,14 @@
-// Options to dynamically set the canvas dimensions
+// Options to dynamically set the canvas dimensions and handle window resizing
 const options = {
   width: window.innerWidth,
   height: window.innerHeight,
 };
+
+// Update the options when the window is resized
+window.addEventListener("resize", () => {
+  options.width = window.innerWidth;
+  options.height = window.innerHeight;
+});
 
 export default class Ball {
   // Constructor to initialize ball properties
@@ -20,14 +26,22 @@ export default class Ball {
     this.x += this.vx;
     this.y += this.vy;
 
-    // Reverse direction if the ball hits the horizontal boundaries
-    if (this.x - this.radius < 0 || this.x + this.radius > options.width) {
-      this.vx *= -1;
+    // Handle horizontal boundary collisions
+    if (this.x - this.radius < 0) {
+      this.x = this.radius; // Correct position if it goes out of bounds
+      this.vx *= -1; // Reverse velocity
+    } else if (this.x + this.radius > options.width) {
+      this.x = options.width - this.radius; // Correct position
+      this.vx *= -1; // Reverse velocity
     }
 
-    // Reverse direction if the ball hits the vertical boundaries
-    if (this.y - this.radius < 0 || this.y + this.radius > options.height) {
-      this.vy *= -1;
+    // Handle vertical boundary collisions
+    if (this.y - this.radius < 0) {
+      this.y = this.radius; // Correct position
+      this.vy *= -1; // Reverse velocity
+    } else if (this.y + this.radius > options.height) {
+      this.y = options.height - this.radius; // Correct position
+      this.vy *= -1; // Reverse velocity
     }
   }
 
