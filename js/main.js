@@ -30,7 +30,7 @@ addButton.addEventListener("click", () => {
   form.style.display = display;
 });
 
-// Canvas setup for dynamic dimensions
+// Canvas setup
 const options = {
   width: window.innerWidth,
   height: window.innerHeight,
