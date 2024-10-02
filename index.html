@@ -13,10 +13,10 @@
   </head>
   <body>
     <div class="main">
-      <button id="add">Add ball</button>
+      <button id="add">Edit</button>
       <button id="clear">Clear</button>
-      <div class="createBallMenu">
-        <form class="form">
+      <div id="menu" class="createBallMenu">
+        <form id="formBall" class="formBall">
           <div class="pickers">
             <label for="ballColor">Ball color: </label>
             <input type="color" name="ballColor" id="ballColor" />
@@ -30,12 +30,16 @@
               id="pickSize"
             />
           </div>
-          <button id="createBall" type="submit">Create</button>
+          <button class="buttonSubmit" id="createBall" type="submit">
+            Create
+          </button>
         </form>
         <form id="backgroundForm">
           <label for="backgroundColor">Background color: </label>
           <input type="color" name="backgroundColor" id="backgroundColor" />
-          <button id="changeBackground" type="submit">Change</button>
+          <button class="buttonSubmit" id="changeBackground" type="submit">
+            Change
+          </button>
         </form>
       </div>
       <div class="ball" id="ball"></div>

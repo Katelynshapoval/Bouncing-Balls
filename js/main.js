@@ -1,27 +1,36 @@
 import Ball from "./Ball.js";
-const form = document.querySelector("formBall");
+
+// Grabbing DOM elements
+let form = document.getElementById("menu");
+let formBall = document.getElementById("formBall");
 let addButton = document.getElementById("add");
 let clearButton = document.getElementById("clear");
-let menu = document.querySelector("createBallMenu");
+let backgroundForm = document.getElementById("backgroundForm");
 
-let ballArray = [];
+let ballArray = []; // Array to store balls
 
+// Clears all balls when the "Clear" button is clicked
 clearButton.addEventListener("click", () => {
   ballArray = [];
 });
 
-addButton.addEventListener("click", () => {
-  let display;
-  if (menu.style.display !== "flex") {
-    display = "flex";
-    addButton.innerText = "Close";
-  } else {
-    display = "none";
-    addButton.innerText = "Add ball";
-  }
-  menu.style.display = display;
+// Handles form submission for changing background color and creating balls
+backgroundForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const formData = new FormData(backgroundForm);
+  const obj = Object.fromEntries(formData);
+  console.log(obj);
+  createBall(obj);
 });
 
+// Toggles form visibility when the "Add" button is clicked
+addButton.addEventListener("click", () => {
+  let display = form.style.display !== "flex" ? "flex" : "none";
+  addButton.innerText = display === "flex" ? "Close" : "Edit";
+  form.style.display = display;
+});
+
+// Canvas setup for dynamic dimensions
 const options = {
   width: window.innerWidth,
   height: window.innerHeight,
@@ -29,53 +38,53 @@ const options = {
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
+// Sets canvas dimensions and starts the animation loop
 function setup() {
   canvas.width = options.width;
   canvas.height = options.height;
-  //   initialBall = new Ball(100, 100, 50, 2, 2, "#fff");
-  //   ballArray.push(initialBall);
   requestAnimationFrame(loop);
 }
 
 // Events
 window.addEventListener("load", setup);
 
+// Updates the state of all balls and checks for collisions
 function update() {
-  //   ball.update(ctx);
   for (let i = 0; i < ballArray.length; i++) {
     ballArray[i].update(ctx);
   }
   isCollisionBall(ballArray);
 }
+
+// Clears the canvas and draws all balls
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   for (let i = 0; i < ballArray.length; i++) {
     ballArray[i].draw(ctx);
   }
 }
+
+// Main animation loop
 function loop() {
   update();
   draw();
-  //   debug();
   requestAnimationFrame(loop);
 }
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault(); // Prevent HTML refresh
-  const formData = new FormData(form); // Converts to array of arrays
-  const obj = Object.fromEntries(formData); // Array of arrays to object
-  console.log(obj);
+// Handles ball creation form submission
+formBall.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const formData = new FormData(formBall);
+  const obj = Object.fromEntries(formData);
   createBall(obj);
 });
 
-// Helper function
+// Helper functions for random number generation
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
-function randomFloat(min, max) {
-  return Math.random() * (max - min) + min;
-}
 
+// Creates a new ball and adds it to the ball array
 function createBall(formData) {
   canvas.style.backgroundColor = formData.backgroundColor;
   if (ballArray.length > 70) {
@@ -97,6 +106,7 @@ function createBall(formData) {
   ballArray.push(newBall);
 }
 
+// Checks and resolves ball collisions
 function isCollisionBall(balls) {
   for (let b1 = 0; b1 < balls.length; b1++) {
     for (let b2 = b1 + 1; b2 < balls.length; b2++) {

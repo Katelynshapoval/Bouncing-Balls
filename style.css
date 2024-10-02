@@ -3,7 +3,6 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  overflow: hidden;
 }
 
 /* General button styles */
@@ -18,42 +17,30 @@ button {
 }
 
 #add {
-  /* display: block; */
   margin: 4px auto;
   width: 200px;
   appearance: none;
   background-color: transparent;
-  border: 2px solid #1a1a1a;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #000000;
   border-radius: 15px;
-  box-sizing: border-box;
-  color: #3b3b3b;
-  cursor: pointer;
-  /* display: inline-block; */
+  color: #000000;
   font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
     Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 16px;
   font-weight: 600;
-  line-height: normal;
-  /* margin: 0; */
-  min-height: 20px;
-  min-width: 0;
-  outline: none;
   padding: 5px 24px;
   text-align: center;
-  text-decoration: none;
   transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
   user-select: none;
-  -webkit-user-select: none;
   touch-action: manipulation;
-  /* width: 100%; */
-  will-change: transform;
 }
 
 #add:disabled {
   pointer-events: none;
 }
 
-/* Hover effects for the "Add ball" button */
+/* Hover and active state effects for the "Add ball" button */
 #add:hover {
   color: #fff;
   background-color: #1a1a1a;
@@ -61,7 +48,6 @@ button {
   transform: translateY(-2px);
 }
 
-/* Active state effects for the "Add ball" button */
 #add:active {
   box-shadow: none;
   transform: translateY(0);
@@ -74,22 +60,24 @@ button {
   height: 30px;
   width: 100px;
   border-radius: 10px;
-
   background-color: white;
+  border: 1px solid #000000;
   color: black;
   transition: color 0.2s linear, background-color 0.2s linear;
 }
+
 #clear:hover {
   border: 1px solid black;
-  background-color: rgb(0, 0, 0);
-  color: rgb(255, 255, 255);
+  background-color: black;
+  color: white;
 }
+
 #clear:active {
   border: 1px solid white;
 }
 
 /* Styles for the "Create" button */
-#createBall {
+.buttonSubmit {
   width: 100px;
   height: 30px;
   margin-top: 10px;
@@ -99,20 +87,20 @@ button {
     background-color 0.2s linear;
 }
 
-#createBall:hover {
+.buttonSubmit:hover {
   transform: translateY(1px);
-  background-color: rgb(0, 0, 0);
-  color: rgb(255, 255, 255);
+  background-color: black;
+  color: white;
 }
 
-#createBall:active {
+.buttonSubmit:active {
   border: 1px solid white;
 }
 
 /* Canvas styles */
 #canvas {
   display: block;
-  background-color: rgb(200, 210, 255);
+  background-color: rgb(135, 116, 240);
 }
 
 /* Main container positioning */
@@ -123,26 +111,24 @@ button {
   transform: translate(-50%, 0);
 }
 
-.createBallMenu {
-  display: none;
-  /* display: flex; */
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Form styles */
-.formBall {
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.514);
-  margin: 20px;
+/* Styles for form containers */
+.createBallMenu,
+.formBall,
+#backgroundForm {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 10px;
+  margin: 20px;
   gap: 10px;
   border: 1px solid black;
   padding: 30px;
+  background-color: rgba(255, 255, 255, 0.514);
+}
+
+.createBallMenu {
+  display: none;
 }
 
 /* Button styles within the form */
