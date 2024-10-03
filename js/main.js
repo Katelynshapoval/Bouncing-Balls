@@ -19,8 +19,7 @@ backgroundForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const formData = new FormData(backgroundForm);
   const obj = Object.fromEntries(formData);
-  console.log(obj);
-  createBall(obj);
+  changeBackground(obj);
 });
 
 // Toggles form visibility when the "Add" button is clicked
@@ -84,9 +83,13 @@ function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
+// Background change
+function changeBackground(formData) {
+  canvas.style.backgroundColor = formData.backgroundColor;
+}
+
 // Creates a new ball and adds it to the ball array
 function createBall(formData) {
-  canvas.style.backgroundColor = formData.backgroundColor;
   if (ballArray.length > 70) {
     alert("You can't create any more balls.");
     return;
